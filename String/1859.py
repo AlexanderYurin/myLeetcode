@@ -1,4 +1,4 @@
-def sortSentence(s: str) -> str:
+def sort_sentence(s: str) -> str:
 	sort_text = list(map(lambda x: x[:len(x)-1], sorted(s.split(), key=lambda x: x[-1])))
 	return " ".join(sort_text)
 

@@ -1,6 +1,4 @@
 from typing import List
-import itertools
-
 
 def arithmeticTriplets(nums: List[int], diff: int) -> int:
 	seen = set()

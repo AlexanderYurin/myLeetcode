@@ -3,21 +3,13 @@ from typing import List
 
 
 def findMaxAverage(nums: List[int], k: int) -> float:
-	# Initialize currSum and maxSum to the sum of the initial k elements
-	currSum = maxSum = sum(nums[:k])
-
-	# Start the loop from the kth element
-	# Iterate until you reach the end
+	max_cur = max_sum = sum(nums[:k])
 	for i in range(k, len(nums)):
-		# Subtract the left element of the window
-		# Add the right element of the window
-		currSum += nums[i] - nums[i - k]
+		max_cur += nums[i] - nums[i - k]
+		if max_cur > max_sum:
+			max_sum = max_cur
 
-		# Update the max
-		maxSum = max(maxSum, currSum)
-
-	# Since the problem requires average, we return the average
-	return maxSum / k
+	return max_sum / k
 
 
 if __name__ == '__main__':

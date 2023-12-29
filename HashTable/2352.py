@@ -3,7 +3,7 @@ from typing import List
 
 def equalPairs(grid: List[List[int]]) -> int:
     columns = [[row[i] for row in grid] for i in range(len(grid))]
-    return 1
+    return 1a
 
 
 

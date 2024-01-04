@@ -1,20 +1,28 @@
 def minimumRecolors(blocks: str, k: int) -> int:
-	start = right = count = 0
-	min_count = float("inf")
-	while right < len(blocks):
-		if min_count == 0:
-			return 0
-		if right - start < k:
-			if blocks[right] == "W":
-				count += 1
-			right += 1
-		if right - start == k:
-			min_count = min(min_count, count)
-			if blocks[start] == "W":
-				count -= 1
-			start += 1
+	# start = right = count = 0
+	# min_count = float("inf")
+	# while right < len(blocks):
+	# 	if min_count == 0:
+	# 		return 0
+	# 	if right - start < k:
+	# 		if blocks[right] == "W":
+	# 			count += 1
+	# 		right += 1
+	# 	if right - start == k:
+	# 		min_count = min(min_count, count)
+	# 		if blocks[start] == "W":
+	# 			count -= 1
+	# 		start += 1
+	#
+	# return min_count
 
-	return min_count
+	i, j, minval = 0, k, k
+	while j <= len(blocks):
+		count = blocks[i:j].count("W")
+		minval = min(minval, count)
+		i += 1
+		j += 1
+	return minval
 
 
 if __name__ == '__main__':

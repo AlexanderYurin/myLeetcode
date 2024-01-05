@@ -16,13 +16,13 @@ def minimumRecolors(blocks: str, k: int) -> int:
 	#
 	# return min_count
 
-	i, j, minval = 0, k, k
+	i, j, min_val = 0, k, k
 	while j <= len(blocks):
 		count = blocks[i:j].count("W")
-		minval = min(minval, count)
+		minval = min(min_val, count)
 		i += 1
 		j += 1
-	return minval
+	return min_val
 
 
 if __name__ == '__main__':

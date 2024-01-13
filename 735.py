@@ -35,6 +35,7 @@ def asteroidCollision(asteroids: List[int]) -> List[int]:
     return stack
 
 
+
 if __name__ == '__main__':
     # assert asteroidCollision(asteroids=[5, 10, -5]) == [5, 10]
     # assert asteroidCollision(asteroids=[5, -5]) == []

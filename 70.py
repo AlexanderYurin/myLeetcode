@@ -1,5 +1,5 @@
 def climbStairs(n: int) -> int:
-	return n if n == 2 and n == 3 else n % 2 + n // 2 * 2 + n % 3 + n // 3 * 3
+	return
 
 
 if __name__ == '__main__':

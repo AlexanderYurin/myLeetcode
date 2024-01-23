@@ -1,5 +1,5 @@
 def climbStairs(n: int) -> int:
-	return
+	return 4
 
 
 if __name__ == '__main__':

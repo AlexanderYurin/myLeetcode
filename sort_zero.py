@@ -8,7 +8,7 @@ def sort_zero(array):
 			result.append(array[i])
 		else:
 			result.appendleft(array[i])
-	return result
+	return list(result)
 
 
 if __name__ == '__main__':

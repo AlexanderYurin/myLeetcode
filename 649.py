@@ -2,26 +2,36 @@ from collections import deque, Counter
 
 
 def predictPartyVictory(senate: str) -> str:
-    queue = list(senate)
-    quantity_senators = Counter(senate)
-    while len(quantity_senators) == 2:
-        round_senate = deque(queue)
-        queue.clear()
-        while round_senate:
-            left_senator = round_senate.popleft()
-            right_senator = round_senate.popleft()
-            if left_senator != right_senator:
-                queue.append(left_senator)
-                quantity_senators[right_senator] -= 1
-                if quantity_senators[right_senator] < 1:
-                    quantity_senators.pop(right_senator)
-            else:
-                queue.append(left_senator)
-                round_senate.appendleft(right_senator)
+    queue = deque(senate)
+    count_senate = Counter(senate)
+    while len(count_senate) == 2:
+        senator = queue.popleft()
+        senator_right = queue.popleft()
+        if senator != senator_right:
+            queue.append(senator)
+            count_senate[senator_right] -= 1
+            if count_senate[senator_right] < 1:
+                count_senate.pop(senator_right)
+        else:
+            count = 2
+            queue += [senator, senator_right]
+            while count != 0:
+                if len(count_senate) == 1:
+                    break
+                senator_right = queue.popleft()
+                if senator_right == senator:
+                    queue.append(senator)
+                    count += 1
+                else:
+                    count -= 1
+                    count_senate[senator_right] -= 1
+                    if count_senate[senator_right] < 1:
+                        count_senate.pop(senator_right)
     else:
-        return "Radiant" if list(quantity_senators)[0] == "R" else "Dire"
+        return "Radiant" if list(count_senate)[0] == "R" else "Dire"
 
 
 if __name__ == '__main__':
-    # assert predictPartyVictory(senate="RD") == "Radiant"
+    assert predictPartyVictory(senate="RRDDDDDDDRRDRRDDRRRR") == "Dire"
     assert predictPartyVictory(senate="DDRRR") == "Dire"
+    assert predictPartyVictory(senate="RDD") == "Dire"

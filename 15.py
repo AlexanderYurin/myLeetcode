@@ -1,32 +1,24 @@
+import itertools
 from typing import List
 
 
 def threeSum(nums: List[int]) -> List[List[int]]:
-    if len(nums) < 3:
-        return []
-    if len(nums) == 3:
-        result = sum(nums)
-        if result == 0:
-            return [nums]
-        return []
-    result = []
-    i, j = 0, 1
-    hash_set = set()
-    while i < len(nums) - 2:
-        if j == len(nums):
-            i += 1
-            j = 0
-        if nums[i] not in hash_set and nums[j] not in hash_set:
-            k = -(nums[i] + nums[j])
-            for i_num in range(len(nums)):
-                if nums[i_num] == k and i_num != i and i_num != j:
-                    result.append([nums[i], nums[j], k])
-                    hash_set.add(nums[i])
-                    hash_set.add(nums[j])
-                    break
-        j += 1
-    return result
+	if len(nums) < 3:
+		return []
+	if len(nums) == 3:
+		result = sum(nums)
+		if result == 0:
+			return [nums]
+		return []
+	result = set()
+	nums.sort()
+	arrays = filter(lambda x: x[0]+x[1]+x[2] == 0, itertools.combinations(nums, 3))
+	for array in arrays:
+		if array not in result:
+			result.add(array)
+
+	return result
 
 
 if __name__ == '__main__':
-    assert threeSum([-1, 0, 1, 2, -1, -4]) == [[-1, -1, 2], [-1, 0, 1]]
+	assert threeSum([-1,0,1,2,-1,-4,-2,-3,3,0,4]) == [[-1, 0, 1], [-1, 2, -1]]

@@ -9,24 +9,19 @@ class TreeNode:
 
 
 def pathSum(root: Optional[TreeNode], targetSum: int) -> int:
-	count_path_sum = []
-
-	def get_sum(node: Optional[TreeNode], curr_sum: int):
-		if not node:
-			if curr_sum == targetSum:
-				count_path_sum.append(1)
-			return
-		get_sum(node.left, curr_sum + node.val)
-		get_sum(node.right, curr_sum + node.val)
+	def get_sum(node: Optional[TreeNode], curr_sum: int = 0):
+		if not node or curr_sum > targetSum:
+			return 0
 		if curr_sum == targetSum:
-			count_path_sum.append(1)
-			return
-		if curr_sum > targetSum:
-			return
+			return 1
+		return get_sum(node.left, curr_sum + node.val) + get_sum(node.right, curr_sum + node.val)
 
-	get_sum(root.left, root.val)
+	if not root:
+		count = 0
+		return count
+	count = get_sum(root)
 
-	return len(count_path_sum)
+	return count + pathSum(root.left, targetSum) + pathSum(root.right, targetSum)
 
 
 if __name__ == '__main__':
@@ -36,4 +31,5 @@ if __name__ == '__main__':
 	# num.left.right = TreeNode(6)
 	# num.right.right = TreeNode(5)
 	# num.right.right.right = TreeNode(5)
+	print(pathSum(num, 3))
 	assert pathSum(num, 3) == 2

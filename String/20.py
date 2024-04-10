@@ -1,13 +1,15 @@
 def isValid(s: str) -> bool:
-	i, j = 0, len(s)
-
-	while i != len(s):
-		if s[i] == "(":
-			i_e = s[:j].index(")")
-			if i_e <= j:
-				j = i_e
-			if i+1 == j:
-				i, j = j, len(s)
+	pairs = {"()", "{}", "[]"}
+	stack = []
+	for elem in s:
+		if elem in "({[" or not stack:
+			stack.append(elem)
+		else:
+			pair_elem = stack.pop() + elem
+			if pair_elem not in pairs:
+				return False
+	else:
+		return len(stack) == 0
 
 
 

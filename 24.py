@@ -1,45 +1,52 @@
+import dataclasses
 from typing import Optional
+@dataclasses.dataclass
 class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+    val:int = 0
+    next= None
+
+
 
 
 def swapPairs(head: Optional[ListNode]) -> Optional[ListNode]:
-    root = head #2
-    swap_node = None #1
+    """
+    Основная идея в сохранение предыдущей ссылки чтобы не было потери значения
+    """
+    if not head or not head.next:
+        return head
 
-    head = head.next
-    root.next = head.next
-    head.next = root
+    n1, n2, new_head, prev= head, head.next, head.next, None
 
-    return head
-    # c = 0
-    #
-    # while root:
-    #     if c % 2 != 0:
-    #         swap_node = root
-    #         root = root.next
-    #     else:
-    #         a = root.next
-    #         print(a.val)
-    #         b = swap_node
-    #         print(b.val)
-    #         swap_node = root
-    #
-    #
-    #
-    #     c += 1
-    # return head
+
+    while n2:
+        if prev:
+            prev.next = n2
+
+
+
+        n2.next, n1.next = n1, n2.next
+
+        if not n1.next:
+            break
+        prev = n1
+        n1 = n1.next
+        n2 = n1.next
+
+    return new_head
+
 
 
 if __name__ == '__main__':
     a = ListNode(1)
-    a.next = ListNode(2)
-    # a.next.next = ListNode(3)
-    # a.next.next.next = ListNode(4)
+    r = a
+    c = 2
 
-    roots = swapPairs(a)
+    while c != 5:
+        a.next = ListNode(c)
+        a = a.next
+        c += 1
+
+    roots = swapPairs(r)
 
     while roots:
         print(roots.val)
